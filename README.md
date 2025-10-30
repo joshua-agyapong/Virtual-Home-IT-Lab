@@ -57,3 +57,6 @@ Operating system installation, administrative login.
 **Action:**
 1. Renamed computer to **DC01**.  
 2. Set static IP address:  
+
+<img width="1495" height="1073" alt="image" src="https://github.com/user-attachments/assets/8ad0ec17-d7ea-4044-ae9b-c6cd461504ff" />
+
