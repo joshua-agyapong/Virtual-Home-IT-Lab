@@ -1,62 +1,103 @@
-# Virtual-Home-IT-Lab
-# 🧩 Home IT Help Desk Lab
+# 🧩 Windows Server 2022 Home Lab – Active Directory Domain Setup
 
-## Overview
-This project builds a small virtual IT environment using **VirtualBox**, **Windows Server 2022**, and **Windows 10**.  
-It simulates how an entry-level IT professional supports users, manages Active Directory, and handles network tasks.
-
----
-
-## 🧱 Module 1 – Virtual Environment Setup
-
-**Reason:** Create an isolated virtual network to safely learn IT administration.  
-**Action:**
-1. Installed VirtualBox 7.x on Windows 11 host.  
-2. Downloaded Windows Server 2022 and Windows 10 ISOs.  
-3. Created VM folder and ISO library at `C:\ISOs\`.  
-4. Built the first virtual machine (DC01) with:
-   - 4 GB RAM
-   - 100 GB dynamically allocated disk  
-   - Bridged or Host-Only Adapter (since “Internal Network” unavailable)
-5. Attached Windows Server 2022 ISO.
-
-**Result:**  
-Virtual machine boots from ISO and starts Windows Server setup.
-
-**Skills Learned:**  
-Virtualization basics, virtual disk management, ISO mounting.
-
-📸 `/Screenshots/VBox_Install.png`  
-📸 `/Screenshots/DC01_Storage_Config.png`  
-📸 `/Screenshots/DC01_Network_Config.png`
+### 🎯 Objective
+Build a self-contained Windows Server 2022 lab in VirtualBox to simulate a small company IT environment.  
+Configured networking, static IP, and installed Active Directory Domain Services (AD DS) with Group Policy Management.
 
 ---
 
-## ⚙️ Module 2 – Install Windows Server 2022
+## 🖥️ Environment Setup
 
-**Reason:** Prepare a base server OS for domain configuration.  
-**Action:**
-1. Booted from Server 2022 ISO.  
-2. Installed **Windows Server Datacenter (Desktop Experience)**.  
-3. Created password for the built-in Administrator account.  
-4. Logged in and confirmed Server Manager launched.
-
-**Result:**  
-Windows Server installed successfully and ready for configuration.
-
-**Skills Learned:**  
-Operating system installation, administrative login.
-
-📸 `/Screenshots/DC01_FirstLogin.png`
+| Component | Details |
+|------------|----------|
+| **Hypervisor** | Oracle VirtualBox 7.2.4 |
+| **VM Name** | DC01 (or LAB-SRV01) |
+| **OS** | Windows Server 2022 Datacenter |
+| **Disk Size** | 100 GB (VDI) |
+| **Network Mode** | Bridged Adapter |
+| **RAM** | 4 GB |
+| **CPU Cores** | 2 |
 
 ---
 
-## 🌐 Module 3 – Server Configuration
+## 🧱 Module 1 – Virtual Machine Creation
 
-**Reason:** Make server identifiable and reachable in network.  
-**Action:**
-1. Renamed computer to **DC01**.  
-2. Set static IP address:  
+**Reason:** Set up a dedicated server for identity management practice.  
+**Action:** Created a new VM, attached Windows Server ISO, and configured storage/network.  
+**Result:** Windows Server 2022 successfully installed in VirtualBox.  
+**Skills Learned:** VM provisioning, ISO management, VirtualBox configuration.
 
-<img width="1495" height="1073" alt="image" src="https://github.com/user-attachments/assets/8ad0ec17-d7ea-4044-ae9b-c6cd461504ff" />
+📸 `Screenshots/DC01_FirstLogin.png`
 
+---
+
+## 🧩 Module 2 – Server Configuration
+
+**Reason:** Establish a consistent environment for networking and identity roles.  
+**Action:** Renamed server to `LAB-SRV01` and assigned a static IP.  
+**Result:** Server reachable by a fixed IP address and easily identifiable in the lab.  
+**Skills Learned:** Computer renaming, IPv4 setup, static addressing.
+
+📸 `Screenshots/DC01_Rename.png`  
+📸 `Screenshots/DC01_StaticIP.png`
+
+---
+
+## 🧩 Module 3 – AD DS Installation
+
+**Reason:** Install Active Directory for centralized authentication and user management.  
+**Action:** Used *Add Roles and Features Wizard* to install:  
+- Active Directory Domain Services  
+- Group Policy Management  
+- .NET Framework 3.5 / 4.8  
+
+**Result:** AD DS role installed successfully and ready for promotion.  
+**Skills Learned:** Role-based installation, feature selection, dependency management.
+
+📸 `Screenshots/DC01_RoleBasedInstall.png`  
+📸 `Screenshots/DC01_ADDS_Features.png`  
+📸 `Screenshots/DC01_ADDSInstallConfirm.png`
+
+---
+
+## 🧩 Module 4 – Domain Promotion
+
+**Reason:** Convert the standalone server into a domain controller.  
+**Action:** Promoted LAB-SRV01 to a new forest domain `techlab.local`.  
+**Result:** Domain successfully created and verified login as `TECHLAB\Administrator`.  
+**Skills Learned:** Forest creation, DNS setup, domain promotion, DSRM configuration.
+
+📸 `Screenshots/DC01_DomainLogin.png`
+
+---
+
+## 🧰 Tools Used
+
+- Oracle VirtualBox  
+- Windows Server 2022 ISO  
+- Server Manager (Add Roles and Features Wizard)  
+- Group Policy Management Console  
+
+---
+
+## 🧠 Key Takeaways
+
+- Learned how to deploy Windows Server from scratch.  
+- Practiced static IP and DNS configuration.  
+- Built a functional domain controller in a home lab environment.  
+- Gained real-world familiarity with IT helpdesk and systems administration tasks.
+
+---
+
+## 🧾 Notes
+All installation steps and credentials are documented in `/Notes/SetupSteps.txt`  
+Default admin password: `P@ssword123!`
+
+---
+
+## 🧩 Next Phase
+**Upcoming modules:**
+- Create Organizational Units (OUs)
+- Add domain users and groups  
+- Apply and test Group Policy Objects (GPOs)  
+- Join a Windows 10 client to the domain  
